@@ -41,7 +41,3 @@ export const getRating = (rating, width) => {
 
     return { reviewRating, ratingWidth };
 };
-
-export const run = (products) =>{
-    products.getProducts()
-}
