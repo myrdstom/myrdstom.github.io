@@ -1,4 +1,5 @@
-import { starsTotal } from '../../templates/stars.js';
+import { starsTotal } from '../../components/stars.js';
+import { header } from "../../components/header.js";
 import Reviews from '../../api/reviews.js';
 import {
     calculateEachReview,
@@ -9,9 +10,7 @@ export default class ProductsService {
     constructor(root) {
         this.root = root;
         this.root.innerHTML = `
-            <nav class="nav">
-                <a href="/" class="nav__link" data-link>Gumroad</a>
-            </nav>
+            ${header()}
             
             <div class="all__reviews">
             </div>
@@ -22,7 +21,7 @@ export default class ProductsService {
 
     _createReviewHTML(data, i) {
         const { productName, productId } = data;
-        return `
+            return `
                  <div class="reviews">
                     <div class="title">${productName}</div>
                     <div class="reviews__content" id="${i}">
@@ -33,7 +32,7 @@ export default class ProductsService {
                         
                          <span class="reviews__button">
                             <button type="submit" class="reviews__add" id="add__review" >
-                                <a href="/addReview.html?reviewId=${productId}">
+                                <a href="addReview.html?reviewId=${productId}">
                                     Add Review
                                 </a>
                             </button>
@@ -59,6 +58,9 @@ export default class ProductsService {
                         ratingId
                     )} <span> ${rating}, </span> <span class="review__desc"> ${description}</span>
                 </div>`;
+    }
+    errorMessage(){
+
     }
 
     async getProducts() {
