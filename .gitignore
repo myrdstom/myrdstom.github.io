@@ -1,7 +1,4 @@
 .idea
-<<<<<<< HEAD
-.DS_Store
-=======
 .DS_Store
 node_modules/
 dist
@@ -10,4 +7,3 @@ dist
 yarn.lock
 yarn-error.log
 package-lock.json
->>>>>>> df15328 (set up the products page)

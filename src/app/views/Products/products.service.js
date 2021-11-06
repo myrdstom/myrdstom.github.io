@@ -32,7 +32,7 @@ export default class ProductsService {
                         
                          <span class="reviews__button">
                             <button type="submit" class="reviews__add" id="add__review" >
-                                <a href="/addReview.html?reviewId=${productId}">
+                                <a href="addReview.html?reviewId=${productId}">
                                     Add Review
                                 </a>
                             </button>
