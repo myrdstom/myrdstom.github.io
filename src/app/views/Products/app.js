@@ -1,4 +1,4 @@
-import ProductsService from "./views/Products/products.service.js";
+import ProductsService from "./products.service.js";
 
 const app = document.getElementById("view-reviews");
 

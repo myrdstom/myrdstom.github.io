@@ -3,14 +3,17 @@ const HTMLWebpackPlugin = require("html-webpack-plugin")
 module.exports =  {
     mode: "development",
     entry: {
-        main: "./src/index.js"
+        app: "./src/index.js",
+        addReview:"./src/reviews.js"
     },
     plugins:[new HTMLWebpackPlugin({
         filename: "index.html",
-        template: "./src/templates/home.html"
+        template: "./src/templates/home.html",
+        excludeChunks: ['addReview']
     }),
     new HTMLWebpackPlugin({
         filename: "addReview.html",
+        chunks: ['addReview'],
         template: "./src/templates/addReview.html"
     })],
     module: {
