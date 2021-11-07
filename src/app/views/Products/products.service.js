@@ -19,7 +19,24 @@ export default class ProductsService {
         `;
     }
 
-    _createReviewHTML(data, i) {
+    async getProducts() {
+        const reviewHTMLContainer = this.root.querySelector('.all__reviews');
+
+        const data = await Reviews.getAllReviews();
+
+        reviewHTMLContainer.innerHTML = '';
+
+        data.map((item, i) => {
+            const { productSlug } = item;
+            const html = this.createReviewHTML(item, productSlug);
+            reviewHTMLContainer.insertAdjacentHTML('beforeend', html);
+            this.createRatingsHTML(item);
+            calculateTotalRating(item);
+            calculateEachReview(item);
+        });
+    }
+
+    createReviewHTML(data, i) {
         const { productName, productId } = data;
             return `
                  <div class="reviews">
@@ -50,37 +67,7 @@ export default class ProductsService {
         `;
     }
 
-    _ratingHTML(data) {
-        const { description, rating, ratingId } = data;
-        return `
-                <div>
-                    ${starsTotal(
-                        ratingId
-                    )} <span> ${rating}, </span> <span class="review__desc"> ${description}</span>
-                </div>`;
-    }
-    errorMessage(){
-
-    }
-
-    async getProducts() {
-        const reviewHTMLContainer = this.root.querySelector('.all__reviews');
-
-        const data = await Reviews.getAllReviews();
-
-        reviewHTMLContainer.innerHTML = '';
-
-        data.map((item, i) => {
-            const { productSlug } = item;
-            const html = this._createReviewHTML(item, productSlug);
-            reviewHTMLContainer.insertAdjacentHTML('beforeend', html);
-            this._createRatingsHTML(item);
-            calculateTotalRating(item);
-            calculateEachReview(item);
-        });
-    }
-
-    _createRatingsHTML(data, i) {
+    createRatingsHTML(data, i) {
         const { productId, ratings } = data;
 
         const arr = [];
@@ -90,8 +77,18 @@ export default class ProductsService {
         for (const rating of ratings) {
             ratingsHTMLContainer.insertAdjacentHTML(
                 'beforeend',
-                this._ratingHTML(rating)
+                this.ratingHTML(rating)
             );
         }
+    }
+
+    ratingHTML(data) {
+        const { description, rating, ratingId } = data;
+        return `
+                <div>
+                    ${starsTotal(
+            ratingId
+        )} <span> ${rating}, </span> <span class="review__desc"> ${description}</span>
+                </div>`;
     }
 }

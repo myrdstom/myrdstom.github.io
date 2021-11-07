@@ -3,8 +3,8 @@ const HTMLWebpackPlugin = require("html-webpack-plugin")
 module.exports =  {
     mode: "development",
     entry: {
-        app: "./src/index.js",
-        addReview:"./src/reviews.js"
+        app: "./src/entryPoints/index.js",
+        addReview:"./src/entryPoints/reviews.js"
     },
     plugins:[new HTMLWebpackPlugin({
         filename: "index.html",
@@ -13,16 +13,7 @@ module.exports =  {
     }),
     new HTMLWebpackPlugin({
         filename: "addReview.html",
-        chunks: ['addReview'],
+        chunks: ['addReview', 'vendor'],
         template: "./src/templates/addReview.html"
     })],
-    module: {
-        rules: [
-            {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-            },
-        ],
-    },
-
 };
